@@ -13,7 +13,7 @@ namespace chrono {
 }
 
 namespace {
-    const string s_list_stmt  { "SELECT `login`, `id` FROM `github_users` ORDER BY id;" };
+    const string s_list_stmt  { "SELECT `login`, `avatar_url`, `id` FROM `github_users` ORDER BY id;" };
 }
 
 namespace mx3 {
