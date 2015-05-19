@@ -1,6 +1,8 @@
 #import "MXSampleDataTableViewController.h"
 #import "gen/MX3UserListVmCell.h"
 #import "gen/MX3ListChange.h"
+#import "MXUserTableViewCell.h"
+#import "UIImageView+AFNetworking.h"
 
 NSString *const CellIdentifier = @"MX3Cell";
 
@@ -27,7 +29,7 @@ NSString *const CellIdentifier = @"MX3Cell";
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.title = [self.api getUsername];
-    [self.tableView registerClass:UITableViewCell.class forCellReuseIdentifier:CellIdentifier];
+    [self.tableView registerNib:[UINib nibWithNibName:@"MXUserTableViewCell" bundle:[NSBundle mainBundle]] forCellReuseIdentifier:CellIdentifier];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -74,12 +76,13 @@ NSString *const CellIdentifier = @"MX3Cell";
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier
+    MXUserTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier
                                                             forIndexPath:indexPath];
 
     MX3UserListVmCell * cellData = [self.viewModel get:(int32_t)indexPath.row];
-    cell.textLabel.text = [cellData name];
-    cell.detailTextLabel.text = @"If you manage to get the deps right";
+    cell.username.text = [cellData name];
+    [cell.userAvatar setImageWithURL:[NSURL URLWithString:[cellData avatarUrl]]];
+//    cell.detailTextLabel.text = @"If you manage to get the deps right";
     return cell;
 }
 

@@ -20,6 +20,8 @@ int main() {
         }
         NSString * username = [api getUsername];
         NSLog(@"Hello, %@", username);
+        NSString *foo = [api getFoo];
+        NSLog(@"Hi, %@", foo);
     } else {
         NSLog(@"Could not find path: `%@`", filePath);
     }

@@ -169,7 +169,7 @@ Value::double_value() const {
 
 const string&
 Value::string_value() const {
-    if (m_type != Type::STRING) {
+    if ((m_type != Type::STRING) ^ (m_string.empty()) ) {
         throw std::runtime_error {"invalid type for column, string"};
     }
     return m_string;

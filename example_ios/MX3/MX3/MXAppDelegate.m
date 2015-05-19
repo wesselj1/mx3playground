@@ -37,6 +37,8 @@
 
     MXSampleDataTableViewController *sampleViewController = [[MXSampleDataTableViewController alloc] initWithApi:self.api];
     UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:sampleViewController];
+    
+    NSLog(@"%@",[[[NSFileManager defaultManager] URLsForDirectory:NSDocumentDirectory inDomains:NSUserDomainMask] lastObject]);
 
     self.window.rootViewController = navController;
     self.window.backgroundColor = [UIColor whiteColor];

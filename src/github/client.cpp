@@ -32,6 +32,9 @@ github::parse_user(const json11::Json& data) {
     user.received_events_url = data["received_events_url"].string_value();
     user.type                = data["type"].string_value();
     user.site_admin          = data["site_admin"].bool_value();
+    if (user.avatar_url.empty()) {
+        user.avatar_url = "";
+    }
     return user;
 }
 

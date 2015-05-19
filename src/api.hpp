@@ -26,6 +26,7 @@ class Api final : public mx3_gen::Api {
     virtual string get_username() override;
     virtual void set_username(const string& name) override;
     virtual shared_ptr<mx3_gen::UserListVmHandle> observer_user_list() override;
+    virtual string get_foo() override;
 
   private:
     // set up the database

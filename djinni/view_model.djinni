@@ -6,6 +6,7 @@ list_change = record {
 user_list_vm_cell = record {
     user_id: i64;
     name: string;
+    avatar_url: string;
 }
 
 user_list_vm = interface +c {

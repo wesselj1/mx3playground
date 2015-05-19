@@ -98,3 +98,8 @@ Api::_setup_db() {
     }
     m_sqlite->enable_wal();
 }
+
+string
+Api::get_foo() {
+	return "bar";
+}
