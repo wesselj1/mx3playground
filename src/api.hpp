@@ -26,7 +26,12 @@ class Api final : public mx3_gen::Api {
     virtual string get_username() override;
     virtual void set_username(const string& name) override;
     virtual shared_ptr<mx3_gen::UserListVmHandle> observer_user_list() override;
+    virtual shared_ptr<mx3_gen::RepoListVmHandle> observer_repo_list() override;
     virtual string get_foo() override;
+    virtual string get_selected_repos_url() override;
+    virtual void set_selected_repos_url(const string &repos_url) override;
+    virtual int64_t get_selected_user_id() override;
+    virtual void set_selected_user_id(int64_t user_id) override;
 
   private:
     // set up the database
@@ -39,6 +44,9 @@ class Api final : public mx3_gen::Api {
     const shared_ptr<SingleThreadTaskRunner> m_ui_thread;
     const shared_ptr<SingleThreadTaskRunner> m_bg_thread;
     mx3::Http m_bg_http;
+    
+    string m_selected_repos_url;
+    int64_t m_selected_user_id;
 };
 
 }

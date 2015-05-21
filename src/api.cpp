@@ -4,6 +4,7 @@
 #include "github/types.hpp"
 #include "db/sqlite_store.hpp"
 #include "ui_interface/user_list_vm.hpp"
+#include "ui_interface/repo_list_vm.hpp"
 
 using mx3::Api;
 using json11::Json;
@@ -64,9 +65,34 @@ Api::set_username(const string& username) {
     m_db->set(USERNAME_KEY, username);
 }
 
+string
+Api::get_selected_repos_url() {
+    return m_selected_repos_url;
+}
+
+void
+Api::set_selected_repos_url(const string &repos_url) {
+    m_selected_repos_url = repos_url;
+}
+
+int64_t
+Api::get_selected_user_id() {
+    return m_selected_user_id;
+}
+
+void
+Api::set_selected_user_id(int64_t user_id) {
+    m_selected_user_id = user_id;
+}
+
 shared_ptr<mx3_gen::UserListVmHandle>
 Api::observer_user_list() {
     return make_shared<mx3::UserListVmHandle>(m_read_db, m_bg_http, m_ui_thread, m_bg_thread);
+}
+
+shared_ptr<mx3_gen::RepoListVmHandle>
+Api::observer_repo_list() {
+    return make_shared<mx3::RepoListVmHandle>(m_read_db, m_bg_http, m_selected_repos_url, m_selected_user_id, m_ui_thread, m_bg_thread);
 }
 
 void
@@ -93,7 +119,23 @@ Api::_setup_db() {
             "PRIMARY KEY(id)"
         ");"
     };
+    vector<string> setup_commands2 {
+        "CREATE TABLE IF NOT EXISTS `github_user_repos` ("
+        "`id` INTEGER, "
+        "`owner_id` INTEGER, "
+        "`name` TEXT, "
+        "`repo_url` TEXT, "
+        "`stargazers_count` INTEGER, "
+        "`watchers_count` INTEGER, "
+        "`language` TEXT, "
+        "PRIMARY KEY(id), "
+        "FOREIGN KEY(owner_id) REFERENCES github_users(id)"
+        ");"
+    };
     for (const auto& cmd : setup_commands) {
+        m_sqlite->exec(cmd);
+    }
+    for (const auto& cmd : setup_commands2) {
         m_sqlite->exec(cmd);
     }
     m_sqlite->enable_wal();

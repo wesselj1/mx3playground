@@ -6,9 +6,16 @@
 api = interface +c {
     static create_api(root_path: string, ui_thread: event_loop, http_impl: http, launcher: thread_launcher): api;
     observer_user_list(): user_list_vm_handle;
+    observer_repo_list(): repo_list_vm_handle;
 
     has_user(): bool;
     get_username(): string;
     set_username(username: string);
     get_foo(): string;
+
+    get_selected_repos_url(): string;
+    set_selected_repos_url(repos_url: string);
+
+    get_selected_user_id(): i64;
+    set_selected_user_id(user_id: i64);
 }

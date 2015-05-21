@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		B09B174F1A1CD61100C8D6A7 /* libdjinni_objc.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B09B174E1A1CD61100C8D6A7 /* libdjinni_objc.a */; };
+		CCEA59841B0D2CF800C76780 /* MXRepoTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CCEA59831B0D2CF800C76780 /* MXRepoTableViewController.m */; };
+		CCEA59941B0D2D4B00C76780 /* MXRepoTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CCEA59921B0D2D4B00C76780 /* MXRepoTableViewCell.m */; };
+		CCEA59951B0D2D4B00C76780 /* MXRepoTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CCEA59931B0D2D4B00C76780 /* MXRepoTableViewCell.xib */; };
 		CCFA20FF1B0AE6000052B6E8 /* AFNetworkActivityIndicatorManager.m in Sources */ = {isa = PBXBuildFile; fileRef = CCFA20EF1B0AE6000052B6E8 /* AFNetworkActivityIndicatorManager.m */; };
 		CCFA21001B0AE6000052B6E8 /* UIActivityIndicatorView+AFNetworking.m in Sources */ = {isa = PBXBuildFile; fileRef = CCFA20F11B0AE6000052B6E8 /* UIActivityIndicatorView+AFNetworking.m */; };
 		CCFA21011B0AE6000052B6E8 /* UIAlertView+AFNetworking.m in Sources */ = {isa = PBXBuildFile; fileRef = CCFA20F31B0AE6000052B6E8 /* UIAlertView+AFNetworking.m */; };
@@ -157,6 +160,11 @@
 		B024F79F1AAD5BFA008B8BB9 /* mx3.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = mx3.xcodeproj; path = ../../build_ios/mx3.xcodeproj; sourceTree = "<group>"; };
 		B02CAAE8192CFB0C007D3B2F /* libCppSQLite.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libCppSQLite.a; path = "../../deps/build/Debug-iphoneos/libCppSQLite.a"; sourceTree = "<group>"; };
 		B09B174E1A1CD61100C8D6A7 /* libdjinni_objc.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libdjinni_objc.a; path = "../../deps/djinni/support-lib/build/Debug-iphoneos/libdjinni_objc.a"; sourceTree = "<group>"; };
+		CCEA59821B0D2CF800C76780 /* MXRepoTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MXRepoTableViewController.h; sourceTree = "<group>"; };
+		CCEA59831B0D2CF800C76780 /* MXRepoTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MXRepoTableViewController.m; sourceTree = "<group>"; };
+		CCEA59911B0D2D4B00C76780 /* MXRepoTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MXRepoTableViewCell.h; sourceTree = "<group>"; };
+		CCEA59921B0D2D4B00C76780 /* MXRepoTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MXRepoTableViewCell.m; sourceTree = "<group>"; };
+		CCEA59931B0D2D4B00C76780 /* MXRepoTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MXRepoTableViewCell.xib; sourceTree = "<group>"; };
 		CCFA20EE1B0AE6000052B6E8 /* AFNetworkActivityIndicatorManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFNetworkActivityIndicatorManager.h; sourceTree = "<group>"; };
 		CCFA20EF1B0AE6000052B6E8 /* AFNetworkActivityIndicatorManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFNetworkActivityIndicatorManager.m; sourceTree = "<group>"; };
 		CCFA20F01B0AE6000052B6E8 /* UIActivityIndicatorView+AFNetworking.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIActivityIndicatorView+AFNetworking.h"; sourceTree = "<group>"; };
@@ -372,6 +380,11 @@
 				F0C77182192A7821006469AB /* MXAppDelegate.m */,
 				F0C771E1192A800F006469AB /* MXSampleDataTableViewController.h */,
 				F0C771E2192A800F006469AB /* MXSampleDataTableViewController.m */,
+				CCEA59821B0D2CF800C76780 /* MXRepoTableViewController.h */,
+				CCEA59831B0D2CF800C76780 /* MXRepoTableViewController.m */,
+				CCEA59911B0D2D4B00C76780 /* MXRepoTableViewCell.h */,
+				CCEA59921B0D2D4B00C76780 /* MXRepoTableViewCell.m */,
+				CCEA59931B0D2D4B00C76780 /* MXRepoTableViewCell.xib */,
 				CCFC02E31B067E4700931E4D /* MXUserTableViewCell.h */,
 				CCFC02E41B067E4800931E4D /* MXUserTableViewCell.m */,
 				CCFC02E51B067E4800931E4D /* MXUserTableViewCell.xib */,
@@ -596,6 +609,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CCEA59951B0D2D4B00C76780 /* MXRepoTableViewCell.xib in Resources */,
 				F0C77185192A7821006469AB /* Images.xcassets in Resources */,
 				CCFC02E71B067E4800931E4D /* MXUserTableViewCell.xib in Resources */,
 			);
@@ -625,10 +639,12 @@
 				CCFA21011B0AE6000052B6E8 /* UIAlertView+AFNetworking.m in Sources */,
 				CCFA211D1B0AE6630052B6E8 /* AFNetworkReachabilityManager.m in Sources */,
 				CCFA21031B0AE6000052B6E8 /* UIImageView+AFNetworking.m in Sources */,
+				CCEA59941B0D2D4B00C76780 /* MXRepoTableViewCell.m in Sources */,
 				F0C7717F192A7821006469AB /* main.m in Sources */,
 				CCFA211E1B0AE6630052B6E8 /* AFSecurityPolicy.m in Sources */,
 				CCFA21001B0AE6000052B6E8 /* UIActivityIndicatorView+AFNetworking.m in Sources */,
 				CCFA21201B0AE6630052B6E8 /* AFURLRequestSerialization.m in Sources */,
+				CCEA59841B0D2CF800C76780 /* MXRepoTableViewController.m in Sources */,
 				F0C77183192A7821006469AB /* MXAppDelegate.m in Sources */,
 				CCFA21211B0AE6630052B6E8 /* AFURLResponseSerialization.m in Sources */,
 				F0C771E3192A800F006469AB /* MXSampleDataTableViewController.m in Sources */,

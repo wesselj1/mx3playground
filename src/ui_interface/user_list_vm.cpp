@@ -13,7 +13,7 @@ namespace chrono {
 }
 
 namespace {
-    const string s_list_stmt  { "SELECT `login`, `avatar_url`, `id` FROM `github_users` ORDER BY id;" };
+    const string s_list_stmt  { "SELECT `login`, `avatar_url`, `repos_url`, `id` FROM `github_users` ORDER BY id;" };
 }
 
 namespace mx3 {
@@ -39,7 +39,7 @@ void UserListVm::delete_row(int32_t index) {
 optional<UserListVmCell>
 UserListVm::get(int32_t index) {
     if (index < this->count()) {
-        return UserListVmCell {index, m_rows[index][0].string_value(), m_rows[index][1].string_value()};
+        return UserListVmCell {index, m_rows[index][0].string_value(), m_rows[index][1].string_value(), m_rows[index][2].string_value()};
     }
     return nullopt;
 }
@@ -70,8 +70,8 @@ UserListVmHandle::start(const shared_ptr<UserListVmObserver>& observer) {
     m_observer = observer;
 
     github::get_users(m_http, nullopt, [db, ui_thread, observer] (vector<github::User> users) mutable {
-        auto update_stmt = db->prepare("UPDATE `github_users` SET `login` = ?2, `avatar_url` = ?3 WHERE `id` = ?1;");
-        auto insert_stmt = db->prepare("INSERT INTO `github_users` (`id`, `login`, `avatar_url`) VALUES (?1, ?2, ?3);");
+        auto update_stmt = db->prepare("UPDATE `github_users` SET `login` = ?2, `avatar_url` = ?3, `repos_url` = ?4 WHERE `id` = ?1;");
+        auto insert_stmt = db->prepare("INSERT INTO `github_users` (`id`, `login`, `avatar_url`, `repos_url`) VALUES (?1, ?2, ?3, ?4);");
         sqlite::TransactionStmts transaction_stmts {db};
         sqlite::WriteTransaction guard {transaction_stmts};
 
@@ -80,11 +80,13 @@ UserListVmHandle::start(const shared_ptr<UserListVmObserver>& observer) {
             update_stmt->bind(1, user.id);
             update_stmt->bind(2, user.login);
             update_stmt->bind(3, user.avatar_url);
+            update_stmt->bind(4, user.repos_url);
             if ( update_stmt->exec() == 0 ) {
                 insert_stmt->reset();
                 insert_stmt->bind(1, user.id);
                 insert_stmt->bind(2, user.login);
                 insert_stmt->bind(3, user.avatar_url);
+                insert_stmt->bind(4, user.repos_url);
                 insert_stmt->exec();
             }
         }

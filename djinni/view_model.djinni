@@ -7,6 +7,7 @@ user_list_vm_cell = record {
     user_id: i64;
     name: string;
     avatar_url: string;
+    repos_url: string;
 }
 
 user_list_vm = interface +c {
@@ -26,5 +27,29 @@ user_list_vm_observer = interface +o +j {
 
 user_list_vm_handle = interface +c {
     start(observer: user_list_vm_observer);
+    stop();
+}
+
+repo_list_vm_cell = record {
+    id: i64;
+    owner_id: i64;
+    name: string;
+    repo_url: string;
+    stargazers_count: i32;
+    watchers_count: i32;
+    language: string;
+}
+
+repo_list_vm = interface +c {
+    count(): i32;
+    get(index: i32): optional<repo_list_vm_cell>;
+}
+
+repo_list_vm_observer = interface +o +j {
+    on_update(changes: optional<list<list_change>>, new_data: repo_list_vm);
+}
+
+repo_list_vm_handle = interface +c {
+    start(observer: repo_list_vm_observer);
     stop();
 }

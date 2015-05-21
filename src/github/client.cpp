@@ -38,6 +38,19 @@ github::parse_user(const json11::Json& data) {
     return user;
 }
 
+github::Repo
+github::parse_repo(const json11::Json &data) {
+    github::Repo repo;
+    repo.id = data["id"].number_value();
+    repo.owner_id = data["owner"]["id"].number_value();
+    repo.name = data["name"].string_value();
+    repo.repo_url = data["html_url"].string_value();
+    repo.stargazers_count = data["stargazers_count"].number_value();
+    repo.watchers_count = data["watchers_count"].number_value();
+    repo.language = data["language"].string_value();
+    return repo;
+}
+
 Client::Client(mx3::Http http_client) : m_http {http_client} {}
 
 // todo error handling?
@@ -71,6 +84,35 @@ github::get_users(mx3::Http http, optional<uint64_t> since, function<void(vector
 }
 
 void
+github::get_user_repos(mx3::Http http, string repos_url, function<void (vector<github::Repo>)> callback) {
+    http.get(repos_url, [callback] (mx3::HttpResponse resp) {
+        if (resp.error) {
+            return;
+        }
+        
+        vector<github::Repo> repos;
+        string error;
+        auto json_response = Json::parse(resp.data, error);
+        if (!error.empty()) {
+            // there was an error
+            // fail somehow
+        } else {
+            if (json_response.is_array()) {
+                for (const auto &item : json_response.array_items()) {
+                    repos.emplace_back( github::parse_repo(item) );
+                }
+            }
+        }
+        callback(repos);
+    });
+}
+
+void
 Client::get_users(optional<uint64_t> since, function<void(vector<github::User>)> callback) {
     github::get_users(m_http, since, callback);
+}
+
+void
+Client::get_user_repos(string repos_url, function<void (vector<github::Repo>)> callback) {
+    github::get_user_repos(m_http, repos_url, callback);
 }

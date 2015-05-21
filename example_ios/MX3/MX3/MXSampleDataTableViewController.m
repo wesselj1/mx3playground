@@ -3,6 +3,7 @@
 #import "gen/MX3ListChange.h"
 #import "MXUserTableViewCell.h"
 #import "UIImageView+AFNetworking.h"
+#import "MXRepoTableViewController.h"
 
 NSString *const CellIdentifier = @"MX3Cell";
 
@@ -68,7 +69,12 @@ NSString *const CellIdentifier = @"MX3Cell";
 }
 
 - (void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    [self.viewModel deleteRow: (int32_t)indexPath.row];
+//    [self.viewModel deleteRow: (int32_t)indexPath.row];
+    MX3UserListVmCell *cellData = [self.viewModel get:(int32_t)indexPath.row];
+    [_api setSelectedUserId:cellData.userId];
+    [_api setSelectedReposUrl:cellData.reposUrl];
+    MXRepoTableViewController *repoVC = [[MXRepoTableViewController alloc] initWithApi:_api];
+    [self.navigationController pushViewController:repoVC animated:YES];
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
